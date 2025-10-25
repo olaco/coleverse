@@ -8,6 +8,21 @@ Coleverse is a central Laravel portfolio hub that showcases independently hosted
 It’s Dockerized for deployment on Render, with future integrations for AI, Web3, and educational tools.
 
 🧩 Structure & Projects
+
+myapp/
+├── .gitignore
+├── README.md
+├── Dockerfile
+├── docker-compose.yml
+├── docker/
+│   └── nginx/
+│       └── default.conf
+├── app/
+├── public/
+├── resources/
+└── .env.example
+
+
 Project	Stack	Description
 Coleverse (Main App- Live)	Laravel + Docker	Core portfolio showing all projects with links, live demos, and screenshots.
 
@@ -30,6 +45,7 @@ Containerization: Docker + Docker Compose
 Version Control: Git & GitHub
 
 Deployment: Render
+
 
 ⚙️ Setup & Usage
 # Clone the repo
