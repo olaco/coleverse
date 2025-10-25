@@ -1,0 +1,56 @@
+services:
+  - type: web
+    name: laravel-app
+    env: docker
+    plan: free
+    autoDeploy: true
+
+    # Where your Dockerfile lives
+    buildCommand: ""  # Docker handles build automatically
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_URL
+        value: https://your-app-name.onrender.com
+      - key: APP_KEY
+        sync: false  # Set this in Render Dashboard manually
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        value: your-db-host.onrender.com
+      - key: DB_PORT
+        value: 3306
+      - key: DB_DATABASE
+        value: laravel
+      - key: DB_USERNAME
+        value: root
+      - key: DB_PASSWORD
+        sync: false  # Set securely in Render Dashboard
+      - key: SESSION_DRIVER
+        value: database
+      - key: CACHE_STORE
+        value: database
+      - key: QUEUE_CONNECTION
+        value: database
+      - key: FILESYSTEM_DISK
+        value: local
+      - key: LOG_CHANNEL
+        value: stack
+      - key: LOG_LEVEL
+        value: info
+    # Web service port (Render expects port 10000 by default in Docker)
+    envSpecific:
+      production:
+        dockerCommand: |
+          php artisan config:cache &&
+          php artisan route:cache &&
+          php artisan migrate --force &&
+          php artisan serve --host=0.0.0.0 --port=10000
+    healthCheckPath: /
+    disk:
+      name: persistent-storage
+      mountPath: /var/www/html/storage
+      sizeGB: 1
