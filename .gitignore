@@ -24,3 +24,6 @@ Homestead.yaml
 Thumbs.db
 # Ignore Docker MySQL data
 docker-compose/mysql/data/
+# Ignore Docker credentials
+docker-compose.yml
+
